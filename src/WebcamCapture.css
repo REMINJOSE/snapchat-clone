@@ -1,12 +1,16 @@
 .webcamCapture {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-content: flex-start;
 }
 
 .webcamCapture__button {
   position: absolute;
-  bottom: 0;
+  top: 90%;
   left: 50%;
+  margin-right: -50%;
   transform: translate(-50%, -50%);
   cursor: pointer;
-  color: white;
+  color: red;
 }

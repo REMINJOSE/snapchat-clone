@@ -1,6 +1,7 @@
 import React , {useEffect} from 'react'
 import {useSelector,useDispatch} from 'react-redux';
-import {resetCameraImage, selectCameraImage} from './features/cameraSlice';
+import {resetCameraImage, selectCameraImage } from './features/cameraSlice';
+import {selectUser} from './features/appSlice'
 import {useHistory} from 'react-router-dom';
 import './Preview.css'
 import CloseIcon from '@material-ui/icons/Close';
@@ -15,7 +16,9 @@ import SendIcon from '@material-ui/icons/Send';
 import {v4 as uuid} from 'uuid';
 import {db,storage} from './firebase';
 import firebase from 'firebase';
+
 function Preview() {
+    const user = useSelector(selectUser);
     const history = useHistory();
     const cameraImage = useSelector(selectCameraImage);
     const dispatch = useDispatch();
@@ -45,10 +48,10 @@ function Preview() {
                     imageUrl:url,
                     username: 'honeybadger',
                     read:false,
-                    //profilepic,
+                    profilepic:user.profilePic,
                     timestamp:firebase.firestore.FieldValue.serverTimestamp(),
                 });
-                history.replace('/chats');
+                history.push('/chats/view');
             });
         });
     };

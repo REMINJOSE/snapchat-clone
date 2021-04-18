@@ -4,14 +4,26 @@ import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import {setCameraImage} from './features/cameraSlice';
 import {useDispatch} from 'react-redux';
 import {useHistory} from 'react-router-dom';
-import './WebcamCapture.css'
+import './WebcamCapture.css';
+import useWindowDimensions from './useWindowDimensions';
 
-const videoConstraints = {
-    width:250,
-    height:400,
-    facingMode: 'user',
-};
+function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height
+  };
+}
+
+
 function WebcamCapture() {
+
+    const { height, width } = useWindowDimensions();
+    const videoConstraints = {
+        width:width,
+        height:height-150,
+        facingMode: 'user',
+    };
     const webcamRef = useRef(null);
     const dispatch = useDispatch();    
     const history = useHistory();
